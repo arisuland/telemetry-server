@@ -1,5 +1,6 @@
 name: Elixir Workflow
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'feature/**'
