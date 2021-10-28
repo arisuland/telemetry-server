@@ -1,4 +1,4 @@
-# 🌌 ~ Arisu.Telemetry
+# 🌌 Arisu.Telemetry
 > Telemetry server for Arisu, to collect error reports and data usage around Arisu development tools, made in Elixir.
 
 ## Why? Is this needed?
@@ -29,16 +29,14 @@ You will need the following tools before starting:
 # 1. Pull the repository into your local machine
 $ git clone https://github.com/arisuland/telemetry-server && cd telemetry-server
 
-# 2. Pull dependencies with `mix`
-$ mix deps.get
-
-# 3. Run Ecto migrations
-$ mix ecto.setup
+# 3. Setup the project and Ecto
+$ mix setup
 
 # 4. Run the Phoenix server
 $ iex -S mix phx.server
 
 # Remove `iex -S` if you wish to run the server, and not have an interactive prompt.
+# Set `MIX_ENV` to `production` to have a production build.
 ```
 
 ## How do you not get counterfit packets?
@@ -52,7 +50,7 @@ Authorization: Session <token>
 In which, it is not easy to retrieve unless you query the `login` mutation with a successful login.
 
 ## Structure
-**Tsubaki**, **Arisu**, **CLI**, and the SDKs will send the following packet if telemetry is enabled:
+**Tsubaki**, **Arisu**, **CLI**, and the official SDKs will send the following packet if telemetry is enabled:
 
 ```js
 {
@@ -88,15 +86,29 @@ In which, it is not easy to retrieve unless you query the `login` mutation with 
     },
     "graphql": {
       "operation": "query/mutation",
-      "query": "// query string"
-    }
+      "query": "// query string" // `login` and `signup` will have masked passwords with (`***`)
+    },
+    "errors": [
+      {
+        "name": "SomeError",
+        "message": "" // anything private will be masked with `***`
+      }
+    ]
   },
 
   // If it's from the frontend:
   "platform": {
     "type": "frontend",
     "route": "...", // using unknown routes, `/~/{username}`, or project settings will not be applied.
-    "time": 0.35
+    "time": 0.35,
+    "status": 200..510
+  },
+  
+  "platform": {
+    "type": "sdk-{{random_string}}",
+    "language": "java/js/go",
+    "operation": "[land.arisu.sdk.java.<class>] | <class>.<method>", // arguments will be masked.
+    "execution": 0.35 // execution time in milliseconds
   }
 }
 ```
