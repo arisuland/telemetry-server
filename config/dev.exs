@@ -22,11 +22,8 @@ config :telemetry_server, Arisu.TelemetryWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "/K029DuWR6mM4gt/KikgN/fiJyAKo6j5nc4NPl4Revqj8wRvX3ibF1KnijvFLY3T",
-  watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-  ]
+  secret_key_base: "ZzPcLz2NVfulBqy1X0WNLpeYW/XDrIkggTTIA4gNKApqQ5JszT0M7x5QDXi8FQcs",
+  watchers: []
 
 # ## SSL Support
 #
@@ -51,17 +48,6 @@ config :telemetry_server, Arisu.TelemetryWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-
-# Watch static and templates for browser reloading.
-config :telemetry_server, Arisu.TelemetryWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"priv/gettext/.*(po)$",
-      ~r"lib/telemetry_server_web/(live|views)/.*(ex)$",
-      ~r"lib/telemetry_server_web/templates/.*(eex)$"
-    ]
-  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

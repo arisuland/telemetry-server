@@ -17,11 +17,8 @@ config :telemetry_server, Arisu.Telemetry.Repo,
 # you can enable the server option below.
 config :telemetry_server, Arisu.TelemetryWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "DM7sHUKHhC6CkSDbU6UQLofKHrvldZs6iLlBxu+xqpvKnmdl5+nhkoBqFfQUkv50",
+  secret_key_base: "PoxmfaMRI5xiRwUKtBmNDUVn/i7PIdMoLB7NAVXL9c6+DgH7x8qIzeFe5ycKNREJ",
   server: false
-
-# In test we don't send emails.
-config :telemetry_server, Arisu.Telemetry.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn

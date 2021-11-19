@@ -7,7 +7,7 @@ defmodule Arisu.TelemetryWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_telemetry_server_key",
-    signing_salt: "iXNF5lEw"
+    signing_salt: "feoCGYAE"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
@@ -25,8 +25,6 @@ defmodule Arisu.TelemetryWeb.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
-    plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :telemetry_server
   end
